@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+ // Create function that randomly returns either 'Rock', 'Paper' or 'Scissors'
+    function getComputerChoice() {
+        const cpuChoice = ['rock', 'paper', 'scissors'] // variable with the choices
+        return cpuChoice[(Math.floor(Math.random() * cpuChoice.length))]
+        // Get random number 0 - 1 , multiply by array length (3), round of to the nearest number by going down.
+
+    }
+
+
+    function playRound(playerSelection, computerSelection){
+
+        playerSelection = playerSelection.toLowerCase()
+
+        if (playerSelection === computerSelection){
+
+            return 'tie'
+
+        } else if(playerSelection === "rock"){
+
+            if (computerSelection === "paper"){
+                return 'loss'
+            } else  {
+                
+                return 'win'
+            }
+        
+        } else if(playerSelection === "paper"){
+            if(computerSelection === "scissors"){
+            
+                return 'loss' 
+            } else {
+            
+                return 'win' 
+            }
+
+        } else if(playerSelection === 'scissors' || 'scissor'){
+            if(computerSelection === 'rock'){
+            
+                return 'loss'
+            } else {
+            
+                return 'win'
+            }
+         
+        }
+    }
+
+    function game(){
+        let playerScore = 0
+        let computerScore = 0
+        let computerChoice = getComputerChoice()
+        let input = prompt("Rock, Paper, Scissors?")
+        let result = playRound(input, computerChoice)
+        
+        if (result === 'win'){
+            playerScore++
+            alert(`You win! ${input} beats ${computerChoice}. Current score is ${playerScore} points to you and ${computerScore} points to the computer. `)
+        } else if (result === 'loss'){
+            computerScore++
+            alert(`You lose! ${computerChoice} beats ${input}. Current score is ${playerScore} points to you and ${computerScore} points to the computer.`)
+        } else {
+            alert(`Its a tie! Current score is ${playerScore} points to you and ${computerScore} points to the computer.`)
+        }
+
+    }
+    </script>
+   
+</body>
+</html>
+
