@@ -18,16 +18,16 @@
     }
 
 
-    function playRound(playerSelection, computerSelection){
+    function playRound(playerSelection, computerSelection){ // declares function that "plays the game", it returns the status och a completed round, be it tie, win or loss.
 
-        playerSelection = playerSelection.toLowerCase()
+        playerSelection = playerSelection.toLowerCase() // takes playerselection and turns it all into lowercase so the player can write case-insensitive selections.
 
-        if (playerSelection === computerSelection){
+        if (playerSelection === computerSelection){ // if player and computer choses same, return tie as a string
 
             return 'tie'
 
-        } else if(playerSelection === "rock"){
-
+        } else if(playerSelection === "rock"){ // if player selects rock, check if computer chose paper because that means the player lost, else return win
+ 
             if (computerSelection === "paper"){
                 return 'loss'
             } else  {
@@ -35,7 +35,7 @@
                 return 'win'
             }
         
-        } else if(playerSelection === "paper"){
+        } else if(playerSelection === "paper"){ // if player selects paper, check if computer chose scissors = loss, else return win
             if(computerSelection === "scissors"){
             
                 return 'loss' 
@@ -44,7 +44,7 @@
                 return 'win' 
             }
 
-        } else if(playerSelection === 'scissors' || 'scissor'){
+        } else if(playerSelection === 'scissors' || 'scissor'){ // if player selects scissors OR scissor, check if computer chose rock = loss, else return win
             if(computerSelection === 'rock'){
             
                 return 'loss'
@@ -56,20 +56,20 @@
         }
     }
 
-    function game(){
-        let playerScore = 0
-        let computerScore = 0
-        let computerChoice = getComputerChoice()
-        let input = prompt("Rock, Paper, Scissors?")
-        let result = playRound(input, computerChoice)
-        
-        if (result === 'win'){
+    function game(){ // function for actually playing the game, need to add a loop and working score counter for this next.
+        let playerScore = 0 // variable for the players score, starting at 0
+        let computerScore = 0 // variable for the computers score, starting at 0
+        let computerChoice = getComputerChoice() // variable that takes the function getComputerChoice and gets the value (choice).
+        let input = prompt("Rock, Paper, Scissors?") // asks the player if they choose rock, paper or scissors and stores that in the variable input
+        let result = playRound(input, computerChoice) // calls the function playRound and uses user input from the prompt and the random choice the computer makes and store the result in the variable result
+
+        if (result === 'win'){ // if the result is win, increment playerScore by 1 and show the player the result and current score
             playerScore++
             alert(`You win! ${input} beats ${computerChoice}. Current score is ${playerScore} points to you and ${computerScore} points to the computer. `)
-        } else if (result === 'loss'){
+        } else if (result === 'loss'){ // if the result is loss, increment computerScore by 1 and show the player the result and current score.
             computerScore++
             alert(`You lose! ${computerChoice} beats ${input}. Current score is ${playerScore} points to you and ${computerScore} points to the computer.`)
-        } else {
+        } else { // if its neither loss or win it has to be tie so this just shows the player the result and current score.
             alert(`Its a tie! Current score is ${playerScore} points to you and ${computerScore} points to the computer.`)
         }
 
