@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Rock paper scissors game</title>
+    <link rel="stylesheet" href="styles.css"> <!--Some pizazz to make it look a little nicer-->
 </head>
 <body style="background-color: antiquewhite;">
     <!--Instructions-->
-    <h1>To play:</h1>
-   <div>Open the console and type "game()"</div> 
-
+    <div class="firstText">A game of rock paper scissors</div>
+    <div class="secondText">-By Helmer</div>
+    <button onclick="game()"> <!--When this is clicked the game() function will be called-->
+        Press this to play
+    </button>
     <script>
     function getComputerChoice() {  // Create function that randomly returns either 'Rock', 'Paper' or 'Scissors'
         const cpuChoice = ['rock', 'paper', 'scissors']  // variable with the choices
@@ -22,7 +25,7 @@
         let choiceMade = playerSelection + " " + computerSelection // combines playerSelection and computerSelection to one string with a space.
     
         if(playerSelection !== 'rock' && playerSelection !== 'scissors' && playerSelection !== 'paper'){  // checks if the player didnt make any choice or spelled it wrong
-            return undefined
+            return null
         } else if(playerSelection === computerSelection){  // if player and computer have same choice return 'tie'. Maybe this can be checked by using choiceMade ?
             console.log(choiceMade)
                 return 'tie'
@@ -35,15 +38,20 @@
              }    
     }
 
-    function game(){ // funtion that 'plays' the game, should start a loop in the future.
-
-        let playerScore = 0 //  players score, starting at 0
-        let computerScore = 0 // computers score, starting at 0
-        let computerChoice = getComputerChoice() // gets the computer choice and stores it.
+    function game(){ // funtion that 'plays' the game and loops until either the player or computer have won. Can probably be made shorter.
+    
+        for(let playerScore = 0, computerScore = 0; computerScore <5 && playerScore <5;){ // create variables for the scores and check if any of them is 5 yet.
+        let computerChoice = getComputerChoice() // get computer choice and store it
         let input = prompt("Rock, Paper, Scissors?") // get player choice and store it
         let result = playRound(input, computerChoice) // calls the function playRound, use input and computerChoice, store result.
 
-        if (result === 'win'){
+        if(playerScore == 4 && result == 'win'){ 
+            playerScore++
+            alert(`Congratulation, you have won! The final score came out to ${playerScore} points to you and ${computerScore} to the computer.`) // Final winning message for player
+        }else if(computerScore == 4 && result == 'lose'){ 
+            computerScore++
+            alert(`You lost! The computer won this time but feel free to play again. The final score came out to ${playerScore} points to you and ${computerScore} to the computer.`) // final losing message for player
+        } else if (result === 'win'){
             playerScore++
             alert(`You win! ${input} beats ${computerChoice}. Current score is ${playerScore} points to you and ${computerScore} points to the computer. `) // if result is win, increment playerScore by 1 and show the player the result and current score
         } else if (result === 'lose'){
@@ -54,7 +62,8 @@
         } else { 
             alert('You didnt enter a valid choice, please try again.') // if input isnt a valid choice this alert will be triggered.
         }
-        console.log(result)
+        }
+
     }
     </script>
    
