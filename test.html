@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+<body>
+    
+    <script>
+
+        function game(playerSelection, computerSelection){
+            playerSelection = playerSelection.toLowerCase()
+            let choiceMade = playerSelection + " " + computerSelection
+            if(playerSelection === computerSelection){
+                console.log('tie')}
+            else if(choiceMade == 'rock scissors' || choiceMade == 'scissors paper' || choiceMade == 'paper rock'){
+                console.log('win')
+                console.log(choiceMade)
+            } else {
+                console.log('lose')
+                console.log(choiceMade)
+             }    
+            
+
+
+
+
+
+
+
+        }
+
+
+        result = game('scissors', 'rock')
+
+
+
+    </script>
+
+
+</body>
+</html>

@@ -2,77 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock paper scissors game</title>
 </head>
-<body>
+<body style="background-color: antiquewhite;">
+    <!--Instructions-->
+    <h1>To play:</h1>
+   <div>Open the console and type "game()"</div> 
+
     <script>
-
-
- // Create function that randomly returns either 'Rock', 'Paper' or 'Scissors'
-    function getComputerChoice() {
-        const cpuChoice = ['rock', 'paper', 'scissors'] // variable with the choices
-        return cpuChoice[(Math.floor(Math.random() * cpuChoice.length))]
-        // Get random number 0 - 1 , multiply by array length (3), round of to the nearest number by going down.
-
+    function getComputerChoice() {  // Create function that randomly returns either 'Rock', 'Paper' or 'Scissors'
+        const cpuChoice = ['rock', 'paper', 'scissors']  // variable with the choices
+        return cpuChoice[(Math.floor(Math.random() * cpuChoice.length))]  // Get random number 0 - 1 , multiply by array length (3), round of to the nearest number by going down.
     }
 
 
-    function playRound(playerSelection, computerSelection){ // declares function that "plays the game", it returns the status och a completed round, be it tie, win or loss.
+    function playRound(playerSelection, computerSelection){ // declares function that "plays the game", it returns the status och a completed round, be it tie, win, loss or undefined if the user dont make a valid choice.
 
-        playerSelection = playerSelection.toLowerCase() // takes playerselection and turns it all into lowercase so the player can write case-insensitive selections.
-
-        if (playerSelection === computerSelection){ // if player and computer choses same, return tie as a string
-
-            return 'tie'
-
-        } else if(playerSelection === "rock"){ // if player selects rock, check if computer chose paper because that means the player lost, else return win
- 
-            if (computerSelection === "paper"){
-                return 'loss'
-            } else  {
-                
+        playerSelection = playerSelection.toLowerCase() // takes playerSelection and turns it all into lowercase so the player can write case-insensitive selections.
+        let choiceMade = playerSelection + " " + computerSelection // combines playerSelection and computerSelection to one string with a space.
+    
+        if(playerSelection !== 'rock' && playerSelection !== 'scissors' && playerSelection !== 'paper'){  // checks if the player didnt make any choice or spelled it wrong
+            return undefined
+        } else if(playerSelection === computerSelection){  // if player and computer have same choice return 'tie'. Maybe this can be checked by using choiceMade ?
+            console.log(choiceMade)
+                return 'tie'
+        }else if(choiceMade == 'rock scissors' || choiceMade == 'scissors paper' || choiceMade == 'paper rock'){ // if player + computer would result in a win for the player, return 'win'
+            console.log(choiceMade)
                 return 'win'
-            }
-        
-        } else if(playerSelection === "paper"){ // if player selects paper, check if computer chose scissors = loss, else return win
-            if(computerSelection === "scissors"){
-            
-                return 'loss' 
-            } else {
-            
-                return 'win' 
-            }
-
-        } else if(playerSelection === 'scissors' || 'scissor'){ // if player selects scissors OR scissor, check if computer chose rock = loss, else return win
-            if(computerSelection === 'rock'){
-            
-                return 'loss'
-            } else {
-            
-                return 'win'
-            }
-         
-        }
+             } else {  // if none of the other statements return true, return 'lose'
+                console.log(choiceMade)
+                return 'lose'
+             }    
     }
 
-    function game(){ // function for actually playing the game, need to add a loop and working score counter for this next.
-        let playerScore = 0 // variable for the players score, starting at 0
-        let computerScore = 0 // variable for the computers score, starting at 0
-        let computerChoice = getComputerChoice() // variable that takes the function getComputerChoice and gets the value (choice).
-        let input = prompt("Rock, Paper, Scissors?") // asks the player if they choose rock, paper or scissors and stores that in the variable input
-        let result = playRound(input, computerChoice) // calls the function playRound and uses user input from the prompt and the random choice the computer makes and store the result in the variable result
+    function game(){ // funtion that 'plays' the game, should start a loop in the future.
 
-        if (result === 'win'){ // if the result is win, increment playerScore by 1 and show the player the result and current score
+        let playerScore = 0 //  players score, starting at 0
+        let computerScore = 0 // computers score, starting at 0
+        let computerChoice = getComputerChoice() // gets the computer choice and stores it.
+        let input = prompt("Rock, Paper, Scissors?") // get player choice and store it
+        let result = playRound(input, computerChoice) // calls the function playRound, use input and computerChoice, store result.
+
+        if (result === 'win'){
             playerScore++
-            alert(`You win! ${input} beats ${computerChoice}. Current score is ${playerScore} points to you and ${computerScore} points to the computer. `)
-        } else if (result === 'loss'){ // if the result is loss, increment computerScore by 1 and show the player the result and current score.
+            alert(`You win! ${input} beats ${computerChoice}. Current score is ${playerScore} points to you and ${computerScore} points to the computer. `) // if result is win, increment playerScore by 1 and show the player the result and current score
+        } else if (result === 'lose'){
             computerScore++
-            alert(`You lose! ${computerChoice} beats ${input}. Current score is ${playerScore} points to you and ${computerScore} points to the computer.`)
-        } else { // if its neither loss or win it has to be tie so this just shows the player the result and current score.
-            alert(`Its a tie! Current score is ${playerScore} points to you and ${computerScore} points to the computer.`)
+            alert(`You lose! ${computerChoice} beats ${input}. Current score is ${playerScore} points to you and ${computerScore} points to the computer.`) // if result is loss, increment computerScore by 1 and show the player the result and current score.
+        } else if (result == 'tie'){ 
+            alert(`Its a tie! Current score is ${playerScore} points to you and ${computerScore} points to the computer.`)// if result is tie, shows result and current score.
+        } else { 
+            alert('You didnt enter a valid choice, please try again.') // if input isnt a valid choice this alert will be triggered.
         }
-
+        console.log(result)
     }
     </script>
    
