@@ -17,31 +17,24 @@
     </div>
 
     <button onclick="game()">
-        <!--When this is clicked the game() function will be called-->
         Press this to play    
-  
     </button>
 
     <script>
         // Function that randomly returns either 'Rock', 'Paper' or 'Scissors'   
     function getComputerChoice() {  
-        // variable with the choices
-        const cpuChoice = ['rock', 'paper', 'scissors'] 
+        const choices = ['rock', 'paper', 'scissors'] 
 
         // Get random number 0 - 1 , multiply by array length (3), 
-        // round of to the nearest number by going down.
-        return cpuChoice[(Math.floor(Math.random() * cpuChoice.length))]    
+        // round off to the nearest number by going down.
+        return choices[(Math.floor(Math.random() * choices.length))]    
     }
 
-        // declares function that "plays the game" 
-        // and returns the status of a completed round
+        // returns status of a round
     function playRound(playerSelection, computerSelection){ 
 
-        // takes playerSelection and turns it all into lowercase 
-        // so the player can write case-insensitive selections.
         playerSelection = playerSelection.toLowerCase() 
 
-        // combines playerSelection and computerSelection
         let choiceMade = playerSelection + " " + computerSelection
         
         // checks if the player didnt make any choice or spelled it wrong
@@ -51,8 +44,6 @@
             return null    
         }
 
-        // if player and computer have same choice return 'tie'.
-        // Maybe this can be checked by using choiceMade ? 
         else if(playerSelection === computerSelection){  
             return 'tie'                
         }
@@ -64,7 +55,6 @@
             return 'win'
         }
 
-        // if none of the other statements return true, return 'lose'
         else {  
             return 'lose'
         }    
@@ -79,19 +69,13 @@
         let playerScore = 0, computerScore = 0; 
             computerScore <5 && playerScore <5;)
         {
-
-        // get computer choice and store it                 
+              
         let computerChoice = getComputerChoice() 
-
-        // get player choice and store it
         let input = prompt("Rock, Paper, Scissors?") 
-
-        // calls playRound, use input and computerChoice, store result.
         let result = playRound(input, computerChoice) 
 
         if (playerScore == 4 && result == 'win'){ 
-            playerScore++
-        // Final winning message for player    
+            playerScore++  
         alert(` Congratulation, you have won! 
                 The final score came out to ${playerScore} points to you 
                 and ${computerScore} to the computer.`) 
@@ -99,8 +83,7 @@
         }
         
         else if(computerScore == 4 && result == 'lose'){ 
-                computerScore++
-        // final losing message for player     
+                computerScore++    
         alert(` You lost! The computer won this time but feel free to play 
                 again. The final score came out to ${playerScore} points to you 
                 and ${computerScore} to the computer.`) 
@@ -108,7 +91,6 @@
 
         else if(result === 'win'){
                 playerScore++
-        // if result is win, increment playerScore by 1 and show results
         alert(` You win! ${input} beats ${computerChoice}. Current score 
                 is ${playerScore} points to you and ${computerScore} points to 
                 the computer. `)
@@ -116,7 +98,6 @@
 
         else if(result === 'lose'){
                 computerScore++
-        // if result is loss, increment computerScore by 1 and show result
         alert(` You lose! ${computerChoice} beats ${input}. Current score 
                 is ${playerScore} points to you and ${computerScore} points to 
                 the computer.`) 
@@ -124,13 +105,12 @@
         } 
 
         else if(result == 'tie'){ 
-        // if result is tie, shows result and current score.
         alert(` Its a tie! Current score is ${playerScore} points to you 
                 and ${computerScore} points to the computer.`)
         }
 
         else { 
-        // if input isnt a valid choice this alert will be triggered.
+
         alert('You didnt enter a valid choice, please try again.') 
         }
 
